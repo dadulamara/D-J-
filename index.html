@@ -35,18 +35,25 @@
     </div>
   </nav>
 
-  <!-- Mobile slide dots -->
+  <!-- Slide dots & swipe arrows (mobile only) -->
   <div class="slide-dots" aria-hidden="true">
-    <button class="slide-dot active" data-slide="hero" aria-label="Go to Home"></button>
-    <button class="slide-dot" data-slide="countdown" aria-label="Go to Countdown"></button>
-    <button class="slide-dot" data-slide="entourage" aria-label="Go to Entourage"></button>
-    <button class="slide-dot" data-slide="details" aria-label="Go to Details"></button>
+    <button class="slide-dot active" data-index="0" aria-label="Home"></button>
+    <button class="slide-dot" data-index="1" aria-label="Countdown"></button>
+    <button class="slide-dot" data-index="2" aria-label="Entourage"></button>
+    <button class="slide-dot" data-index="3" aria-label="Details"></button>
+  </div>
+  <div class="swipe-hint" aria-hidden="true">
+    <button class="swipe-hint__btn hidden" id="prev-btn">&#8592;</button>
+    <button class="swipe-hint__btn" id="next-btn">&#8594;</button>
   </div>
 
   <main id="main-content">
+    <div class="slide-wrapper">
+      <div class="slide-track" id="slide-track">
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero" aria-labelledby="couple-names">
+        <!-- SLIDE 1: HERO -->
+        <div class="slide" id="slide-0">
+          <section class="hero" id="hero" aria-labelledby="couple-names">
       <div class="hero__bg" aria-hidden="true"></div>
       <div class="hero__overlay" aria-hidden="true"></div>
 
@@ -103,20 +110,22 @@
             <span class="venue-icon" aria-hidden="true">⛪</span>
             <address>
               <strong>Ceremony</strong>
-              <a href="https://www.google.com/maps/search/San+Isidro+Labrador+Parish+Lazi+Siquijor" target="_blank" rel="noopener noreferrer" class="venue-link" aria-label="Open San Isidro Labrador Parish in Google Maps">
-                San Isidro Labrador Parish<br />Lazi, Siquijor
-              </a>
+              San Isidro Labrador Parish<br />Lazi, Siquijor
             </address>
+            <a href="https://www.google.com/maps/search/San+Isidro+Labrador+Parish+Lazi+Siquijor" target="_blank" rel="noopener noreferrer" class="map-link" aria-label="Open San Isidro Labrador Parish in Google Maps">
+              <span class="map-link__icon">📍</span> View on Map
+            </a>
           </div>
           <div class="venue-divider" aria-hidden="true">◆</div>
           <div class="venue-card">
             <span class="venue-icon" aria-hidden="true">🥂</span>
             <address>
               <strong>Reception</strong>
-              <a href="https://www.google.com/maps/search/Saguing+Maria+Siquijor" target="_blank" rel="noopener noreferrer" class="venue-link" aria-label="Open Saguing Maria, Siquijor in Google Maps">
-                Enot-Cross Residence<br />Saguing Maria, Siquijor
-              </a>
+              Enot-Cross Residence<br />Saguing Maria, Siquijor
             </address>
+            <a href="https://www.google.com/maps/search/Saguing+Maria+Siquijor" target="_blank" rel="noopener noreferrer" class="map-link" aria-label="Open Saguing Maria, Siquijor in Google Maps">
+              <span class="map-link__icon">📍</span> View on Map
+            </a>
           </div>
         </div>
 
@@ -129,9 +138,11 @@
         </a>
       </div>
     </section>
+        </div><!-- end slide-0 -->
 
-    <!-- ===== COUNTDOWN ===== -->
-    <section class="countdown-section" id="countdown" aria-labelledby="countdown-heading">
+        <!-- SLIDE 2: COUNTDOWN -->
+        <div class="slide" id="slide-1">
+          <section class="countdown-section" id="countdown" aria-labelledby="countdown-heading">
       <div class="section-inner">
         <h2 id="countdown-heading" class="section-title">Counting Down to Our Day</h2>
         <p class="section-sub">Saturday · May 23, 2026 · 2:00 PM</p>
@@ -158,9 +169,11 @@
         </div>
       </div>
     </section>
+        </div><!-- end slide-1 -->
 
-    <!-- ===== ENTOURAGE ===== -->
-    <section class="entourage" id="entourage" aria-labelledby="entourage-heading">
+        <!-- SLIDE 3: ENTOURAGE -->
+        <div class="slide" id="slide-2">
+          <section class="entourage" id="entourage" aria-labelledby="entourage-heading">
       <div class="entourage__top-deco" aria-hidden="true"></div>
       <div class="section-inner">
         <h2 id="entourage-heading" class="script-title">Entourage</h2>
@@ -286,9 +299,11 @@
         </div>
       </div>
     </section>
+        </div><!-- end slide-2 -->
 
-    <!-- ===== DETAILS ===== -->
-    <section class="details" id="details" aria-labelledby="details-heading">
+        <!-- SLIDE 4: DETAILS + CLOSING -->
+        <div class="slide" id="slide-3">
+          <section class="details" id="details" aria-labelledby="details-heading">
       <div class="section-inner">
         <h2 id="details-heading" class="script-title">Details</h2>
         <p class="section-sub">Everything you need to know</p>
@@ -370,6 +385,10 @@
       </div>
     </section>
 
+        </div><!-- end slide-3 -->
+
+      </div><!-- end slide-track -->
+    </div><!-- end slide-wrapper -->
   </main>
 
   <footer class="site-footer" role="contentinfo">
