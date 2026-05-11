@@ -231,7 +231,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
    ============================================= */
 @media (max-width: 768px) {
 
-  /* Lock body, make slider the viewport */
   html, body { height: 100%; overflow: hidden; }
 
   .slide-wrapper {
@@ -249,7 +248,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
     will-change: transform;
   }
 
-  /* Each slide = full viewport width */
   .slide {
     flex: 0 0 100vw;
     width: 100vw;
@@ -257,21 +255,17 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    /* push content below the fixed nav */
+    padding-top: 56px;
   }
 
-  /* Sections fill their slide */
-  .slide > section {
-    min-height: 100%;
-  }
-
-  /* Nav on top of everything */
   .site-nav { z-index: 200; }
 
   /* Dot indicators at bottom */
   .slide-dots {
     display: flex !important;
     position: fixed;
-    bottom: 18px;
+    bottom: 14px;
     left: 50%;
     transform: translateX(-50%);
     gap: 8px;
@@ -283,19 +277,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
     background: rgba(139,26,42,.3);
     border: 2px solid var(--burg);
     cursor: pointer; padding: 0;
-    transition: background .3s, transform .3s, width .3s;
+    transition: background .3s, width .3s;
   }
-  .slide-dot.active {
-    background: var(--burg);
-    width: 22px;
-    border-radius: 4px;
-  }
+  .slide-dot.active { background: var(--burg); width: 22px; border-radius: 4px; }
 
-  /* Swipe hint arrows */
+  /* Arrow buttons */
   .swipe-hint {
     display: flex;
     position: fixed;
-    bottom: 50px;
+    bottom: 44px;
     width: 100%;
     justify-content: space-between;
     padding: 0 12px;
@@ -304,35 +294,44 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
   }
   .swipe-hint__btn {
     pointer-events: all;
-    background: rgba(139,26,42,.7);
+    background: rgba(139,26,42,.75);
     border: none; border-radius: 50%;
-    width: 36px; height: 36px;
-    color: var(--white); font-size: 1rem;
+    width: 38px; height: 38px;
+    color: var(--white); font-size: 1.1rem;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: background .2s;
+    cursor: pointer; transition: background .2s;
   }
-  .swipe-hint__btn:hover { background: var(--burg); }
+  .swipe-hint__btn:hover { background: var(--burg-dark); }
   .swipe-hint__btn.hidden { opacity: 0; pointer-events: none; }
 
-  /* Layout tweaks for mobile */
-  .hero { padding: 5rem 1rem 4rem; min-height: unset; }
-  .hero__photo-frame, .hero__photo-wrap { width: 160px; height: 160px; }
-  .hero__date { padding: 1rem 1.5rem; }
-  .hero__venues { flex-direction: column; align-items: center; gap: .8rem; }
+  /* Section padding — top accounts for nav, bottom for dots+arrows */
+  .hero              { padding: 1.5rem 1rem 5rem; min-height: unset; }
+  .countdown-section { padding: 2rem 1rem 5rem; display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 56px); }
+  .entourage         { padding: 2rem 1rem 5rem; }
+  .details           { padding: 2rem 1rem 5rem; }
+  .closing           { padding: 2rem 1rem 5rem; }
+
+  /* Photo */
+  .hero__photo-frame, .hero__photo-wrap { width: 150px; height: 150px; }
+  .hero__tagline { margin-bottom: 1rem; }
+  .hero__date { padding: .8rem 1.2rem; margin-bottom: 1rem; }
+  .hero__venues { flex-direction: column; align-items: center; gap: .6rem; }
   .venue-divider { display: none; }
+  .save-the-date { margin-bottom: 1rem; }
+
+  /* Countdown — all 4 units in one row */
+  .countdown { gap: .25rem; flex-wrap: nowrap; }
+  .countdown__unit { min-width: 0; flex: 1; padding: .6rem .3rem; border-radius: 8px; }
+  .countdown__num { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .countdown__label { font-size: .55rem; letter-spacing: .1em; }
+  .countdown__sep { font-size: 1.4rem; padding-top: .4rem; }
+
+  /* Entourage */
   .names-grid--2col { grid-template-columns: 1fr 1fr; gap: .1rem .8rem; }
   .roles-grid { grid-template-columns: 1fr 1fr; gap: .8rem; }
   .role-card--full { grid-column: 1 / -1; }
-  .countdown { gap: .3rem; }
-  .countdown__unit { min-width: 62px; padding: .8rem; }
-  .countdown__sep { font-size: 1.8rem; padding-top: .5rem; }
   .corner--tr, .corner--bl { display: none; }
   .scroll-hint { display: none; }
-  .entourage { padding: 4rem 1rem 5rem; }
-  .details { padding: 4rem 1rem 5rem; }
-  .countdown-section { padding: 4rem 1rem 5rem; }
-  .closing { padding: 4rem 1rem 5rem; }
 }
 
 @media (min-width: 769px) {
