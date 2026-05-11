@@ -169,6 +169,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
 .venue-card address { font-style: normal; font-family: var(--serif); font-size: .95rem; color: var(--text); text-align: center; line-height: 1.5; }
 .venue-card address strong { display: block; font-family: var(--sans); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--burg); margin-bottom: .2rem; }
 .venue-divider { font-size: .6rem; color: var(--gold); align-self: center; padding-top: 1.5rem; }
+.venue-link { color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--gold); transition: color .2s, border-color .2s; }
+.venue-link:hover { color: var(--burg); border-bottom-color: var(--burg); }
 
 /* Save the date */
 .save-the-date { display: inline-block; border: 1px solid var(--gold); border-radius: 30px; padding: .5rem 2rem; font-family: var(--script); font-size: 1.4rem; color: var(--burg); letter-spacing: .05em; margin-bottom: 2rem; background: rgba(201,169,110,.08); }
@@ -343,7 +345,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
   .hero__date { padding: 1rem 1.5rem; }
   .hero__venues { flex-direction: column; align-items: center; }
   .venue-divider { display: none; }
-  .names-grid--2col { grid-template-columns: 1fr; }
+  .names-grid--2col { grid-template-columns: 1fr 1fr; }
   .roles-grid { grid-template-columns: 1fr; }
   .role-card--full { grid-column: 1; }
   .countdown { gap: .3rem; }
@@ -367,4 +369,103 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
   .hero__photo-wrap { border: 2px solid ButtonText; }
   .swatch { border: 2px solid ButtonText; }
   .detail-card { border: 1px solid ButtonText; }
+}
+
+/* =============================================
+   SLIDE NAVIGATION — Mobile & Tablet (≤768px)
+   ============================================= */
+@media (max-width: 768px) {
+
+  /* Turn the page into a full-height slide container */
+  html, body { height: 100%; overflow: hidden; }
+
+  main {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Each section snaps into view */
+  main > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Sections that have lots of content scroll internally */
+  .entourage, .details {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Nav stays fixed on top */
+  .site-nav { z-index: 200; }
+
+  /* Slide dots — right side */
+  .slide-dots {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    position: fixed;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 300;
+  }
+  .slide-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(139,26,42,.25);
+    border: 2px solid var(--burg);
+    cursor: pointer;
+    padding: 0;
+    transition: background .3s, transform .3s;
+  }
+  .slide-dot.active {
+    background: var(--burg);
+    transform: scale(1.3);
+  }
+
+  /* Mobile-specific layout tweaks */
+  .hero { padding: 5rem 1rem 3rem; }
+  .hero__photo-frame, .hero__photo-wrap { width: 170px; height: 170px; }
+  .hero__date { padding: 1rem 1.5rem; }
+  .hero__venues { flex-direction: column; align-items: center; }
+  .venue-divider { display: none; }
+
+  /* Principal sponsors: always keep pairs side by side */
+  .names-grid--2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .2rem 1rem;
+  }
+
+  .roles-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .role-card--full { grid-column: 1 / -1; }
+
+  .countdown { gap: .3rem; flex-wrap: wrap; justify-content: center; }
+  .countdown__unit { min-width: 65px; padding: .8rem; }
+  .countdown__sep { font-size: 1.8rem; padding-top: .5rem; }
+  .corner--tr, .corner--bl { display: none; }
+
+  .details-grid { grid-template-columns: 1fr; }
+  .detail-card--wide { grid-column: 1; }
+}
+
+/* Desktop: hide slide dots */
+@media (min-width: 769px) {
+  .slide-dots { display: none; }
+}
+
+/* =============================================
+   RESPONSIVE — MOBILE (≤480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .site-nav ul a { font-size: .68rem; padding: .28rem .45rem; letter-spacing: .05em; }
+  .names-grid--2col { grid-template-columns: 1fr 1fr; gap: .1rem .8rem; }
+  .roles-grid { grid-template-columns: 1fr 1fr; }
 }

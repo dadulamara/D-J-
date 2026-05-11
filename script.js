@@ -64,27 +64,54 @@
 })();
 
 // =============================================
-// Nav: highlight active section on scroll
+// Slide dots — sync with scroll on mobile/tablet
 // =============================================
 (function () {
-  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('.slide-dot');
+  const main = document.querySelector('main');
+
+  if (!dots.length || !main) return;
+
+  // Click dot → scroll to section
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.slide);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Scroll → update active dot
+  const sections = ['hero', 'countdown', 'entourage', 'details'];
+  function updateDots() {
+    const scrollTop = main.scrollTop;
+    const viewH = main.clientHeight;
+    let active = 0;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollTop + viewH * 0.5) active = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === active));
+  }
+
+  main.addEventListener('scroll', updateDots, { passive: true });
+  updateDots();
+})();
+
+// =============================================
+// Nav links — scroll inside main on mobile
+// =============================================
+(function () {
   const navLinks = document.querySelectorAll('.site-nav ul a');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.removeAttribute('aria-current');
-            if (link.getAttribute('href') === '#' + entry.target.id) {
-              link.setAttribute('aria-current', 'true');
-            }
-          });
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-
-  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (!href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      const main = document.querySelector('main');
+      if (target && main && window.innerWidth <= 768) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 })();
